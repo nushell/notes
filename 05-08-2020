@@ -1,0 +1,112 @@
+Notes:
+
+`start` - automatically opens an app based on the type of file
+* potentially land into unstable
+
+Aliases
+* --save
+* rest arguments
+* being able to pass flags
+* precedence of aliases for builtin/external/alias
+* May need a way to force an internal command
+* Set of common aliases?
+  * gedge would prefer starting with empty
+* df
+* way to print commands aliases separately
+* import "alias sets", etc .profile
+* once we have alias sets, you could do:
+  * `import linux-shortcuts`
+
+More builtin-values
+* osname?
+* maybe `$nu.sys.system.os`?
+* OS => $(sys).system.os could expand to ( $(sys | get system.os) )
+
+boolean
+* yes/no sometimes
+* true/false sometimes
+
+Completions 
+* wrap externals commands with a signature
+* needs to preserve order
+* flags needs `=` or " "
+* global set of flags before subcommands, how do we model that?
+* need a set of real world examples that show corner cases
+* signature sets 
+  * gedge to pair
+* modules could possibly match with the command/subcommands hierarchy
+* lets subcommands know about the flags on the main command
+* Example external completion: `git push j<here> b<here>`
+  * git push subcommand
+    * required arg 1: ID: 100
+    * required arg 2: ID: 101
+  * parses as:
+    * git
+    * push
+    * required args
+      * remote-name: Shape: String(100)
+      * branch-name: Shape: String(101)
+* Note: git subcommands have additional subcommand
+  * may need arbitrarily deep subcommands
+
+Renames of commands
+* we could do deprecation warnings
+* upgrade scripts command (migration helper)
+
+Canonical command names
+* maybe there's a configurable layer from a name to the canonical Nu name
+* eg) `dir` = `list-files`, `ls` = `list-files`
+
+config is tough to change
+* `config --edit` could open system text editor
+* `config set` etc could be subcommands
+* structured edit of config
+* we'll lose comments when we save out
+* what if `config` was a nu script?
+
+assignment
+* `with-env [x 100] { ... }` could possibly be `with-env x = 100 { ... }`
+* `config set foo = 100`
+* `with-env [x 100 y 200 z 300] { ... }`
+* `with-env [x = 100 y = 200 z = 300] { ... }`
+* `with-env [x = 100, y = 200, z = 300] { ... }`
+* `with-env x = 100, y = 200, z = 300 { ... }`
+* `with-env x=100 y=200 z=300 { ... }`
+* `with-env [x 100, y 200, z 300] { ... }`
+* `with-env [[x 100] [y 200] [z 300]] { ... }`
+* ACTION ITEM: 
+  * explore adding comma is whitespace  
+
+table comprehensions
+* `[with-env [x 100] { ... }]`
+* `[ x | x <- with-env [x 100] { ... }]
+* `[x for x in with...]`
+
+RFCs
+* ACTION ITEM: RFC #1 in the next three weeks
+
+Topics we didn't get to:
+`empty?` and related
+`if`
+Moving to real scripts
+* defer to RFC process?
+Command types
+It's difficult to know if the command works on a table, a row, on columns
+Maybe use subcommands to focus on the type
+What does a flag mean / subcommands means? What is ideal for subcommand?
+eg) `take`, `skip`, etc
+subcommands can take flags too
+Cleanup of pipeline output
+Sometimes you want just one value, not a whole table
+`<value>`
+what if we didn't show the header
+maybe `$it`?
+need more viewers (like list of strings)
+Cleaning up `autoview`
+
+
+we may want a strong `where` that can see all columns
+We don't have a way to specify a cell location
+Picking - subtable ranges
+
+
